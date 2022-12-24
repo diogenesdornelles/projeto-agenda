@@ -278,7 +278,7 @@ exports.create_event = (req, res) => {
 // READ EVENT
 exports.get_agenda = (req, res) => {
   Event.find().sort({ start: 1 })
-  .then( () => {
+  .then( (data) => {
     res.status(200).json(data); 
     }).catch( err => {
       console.log(err);
