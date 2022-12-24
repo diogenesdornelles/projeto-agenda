@@ -2,7 +2,7 @@ import imgHome from '../images/casa.png';
 import imgLogin from '../images/login-icon.png';
 import imgContactBook from '../images/agenda.png';
 import imgRegister from '../images/register.png';
-import imgLogout from '../images/logOut.png';
+import imgLogout from '../images/logout.png';
 
 const images = {
   home: imgHome,
