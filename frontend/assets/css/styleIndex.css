@@ -1,0 +1,22 @@
+.img-bg {
+  background-image: url('https://icon-library.com/images/contact-book-icon/contact-book-icon-3.jpg');
+  background-size: contain;
+  background-position: center center;
+  width: 43vw;
+  height: 49vh;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: .06;
+}
+
+.svg-bg {
+  background-color: #ffffff;
+  width: 100vw;
+  height: 100vh;
+  z-index: -99999;
+  position: absolute;
+}

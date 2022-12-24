@@ -1,0 +1,55 @@
+.index .container .login-painel 
+{
+  width: 30vw;
+  height: 30vh;
+  margin: 5% auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  -webkit-animation: fade-in-fwd 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both;
+	animation: fade-in-fwd 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both;
+}
+
+@-webkit-keyframes fade-in-fwd {
+  0% {
+    -webkit-transform: translateZ(-80px);
+            transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-fwd {
+  0% {
+    -webkit-transform: translateZ(-80px);
+            transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+.index .container .login-painel h1 {
+  text-align: center;
+  height: 5%;
+  width: 100%;
+  font-size: 5.5vh;
+  margin-bottom: 6%;
+}
+
+.index .container .login-painel .form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}

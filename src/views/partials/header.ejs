@@ -1,0 +1,22 @@
+<section class="header">
+  <nav>
+    <ul>
+      <% if (logged) { %> 
+        <li _idUser="<%=_idUser%>" nameUser="<%=userName%>" class="logged-user">Bem-vindo: <%=userName%></li>
+      <% } %>
+      <li><a class="link-menu image-home" href="/home" data-title="Home"></a></li>
+      <% if (logged) { %> 
+        <li><a class="link-menu image-login" href="/entrar" data-title="Login" style="display: none;"></a></li>
+      <% } else { %>
+      <li><a class="link-menu image-login" href="/entrar" data-title="Login"></a></li>
+      <% } %>
+      <li><a class="link-menu contactBook image-contactbook" href="/agenda" data-title="Agenda"></a></li>
+      <li><a class="link-menu image-register" href="/registrar" data-title="Registrar novo usuário"></a></li>
+      <% if (logged) { %> 
+        <li><a class="image-logout" href="/logout" data-title="Sair"></a></li>
+      <% } %>
+    </ul>
+  </nav>
+</section>
+
+

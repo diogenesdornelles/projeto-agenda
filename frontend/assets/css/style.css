@@ -1,0 +1,187 @@
+body {
+  scroll-behavior: smooth;
+}
+
+[data-title]:hover:after {
+  opacity: 1;
+  transition: all 0.1s ease 0.5s;
+  visibility: visible;
+}
+[data-title]:after {
+  content: attr(data-title);
+  background-color: #ffffff;
+  color: #111;
+  font-size: 1em;
+  position: absolute;
+  padding: 1px 1px 1px 1px;
+  bottom: -3em;
+  left: 60%;
+  white-space: nowrap;
+  box-shadow: 1px 1px 3px #222222;
+  opacity: 0;
+  border: 1px solid #111111;
+  z-index: 99999;
+  visibility: hidden;
+}
+[data-title] {
+  position: relative;
+}
+
+input[type="radio"]
+{
+  width: 1em;
+  height: 1em;
+  accent-color: #000;
+}
+
+textarea,
+select,
+input[type="time"],
+input[type="tel"],
+input[type="search"],
+input[type="date"],
+input[type="password"],
+input[type="text"],
+input[type="email"]
+{
+  width: 70%;
+  border: none;
+  border-bottom: 1px solid #00000059;
+  height: 4vh;
+  text-indent: 5px;
+  color: #0a3363;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  font-size: 2vh;
+  font-weight: 700;
+}
+
+textarea {
+  height: 8vh;
+}
+
+input[type="tel"]:hover,
+input[type="search"]:hover,
+input[type="password"]:hover,
+input[type="text"]:hover,
+input[type="email"]:hover {
+  border: 1px solid #e4e4e4;
+}
+
+input[type="tel"]:focus,
+input[type="search"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="email"]:focus {
+  border: 1px solid #c8c8c8;
+  outline: #e9e9e9;
+  background-color: rgb(247, 247, 247);
+}
+
+input[type="checkbox"] {
+  accent-color: black;
+  text-align: center;
+}
+
+button,
+.a-btn
+{
+  background-color: #000000;
+  color: rgb(231, 239, 255);
+  width: fit-content;
+  padding: 0px 20px;
+  cursor: pointer;
+  height: 4.5vh;
+  margin-left: 0;
+  border-radius: 7px;
+  line-height: 4vh;
+  font-size: .9em;
+  font-weight: 800;
+  transition: all 0.5s ease;
+}
+
+button:hover
+{
+  background-color: #020c22;
+  padding: 0px 40px;
+}
+
+.a-btn:hover {
+  background-color: #020c22;
+}
+
+.search-option,
+.gender-option {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  gap: 3%;
+  width: 100%;
+  margin-bottom: 3%;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: center;
+  padding: 4% 0 3% 0;
+}
+
+.advice-note {
+  margin-top: 15%;
+  text-align: center;
+  font-size: 2em;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+input[type="time"],
+input[type="date"]
+{
+  background-color: #000000;
+  padding: 4px;
+  color: #ffffff;
+  border: none;
+  outline: none;
+}
+
+input[type="time"]:hover,
+input[type="date"]:hover
+{
+  background-color: #000000;
+}
+
+input[type="time"]:focus,
+input[type="date"]:focus
+{
+  background-color: #000000; 
+}
+
+::-webkit-calendar-picker-indicator{
+  background-color: #ffffff;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}

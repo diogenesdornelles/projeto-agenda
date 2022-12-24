@@ -1,0 +1,18 @@
+/*
+css frontend
+*/
+
+.index {
+  background-color: white;
+  width: 100vw;
+  height: 95vh;
+  overflow-x: hidden;
+}
+
+.index .container {
+  width: 100vw;
+  height: 91vh;
+  overflow-x: hidden;
+}
+
+

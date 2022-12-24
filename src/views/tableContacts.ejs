@@ -1,0 +1,48 @@
+<ul class="row header-table">
+  <meta data-csrftoken="<%=csrfToken%>" class="_csrf">
+  <li class="cell item-header">Nome</li>
+  <li class="cell item-header">Sobrenome</li>
+  <li class="cell item-header">Email</li>
+  <li class="cell item-header">Telefone</li>
+  <li class="cell item-header">Data de nascimento</li>
+  <li class="cell item-header">Sexo</li>
+  <li class="cell item-header">CPF</li>
+  <li class="cell item-header">Ações</li>
+</ul>
+<% if (contacts) { %> 
+  <% const options = { year: 'numeric', month: 'numeric', day: 'numeric' }; %> 
+  <% contacts.forEach(contact => { %>
+    <ul class="row row-body">
+      <li class="cell cell-body">
+        <%=contact.name%>
+      </li>
+      <li class="cell cell-body">
+        <%=contact.surname%>
+      </li>
+      <li class="cell cell-body">
+        <%=contact.email%>
+      </li>
+      <li class="cell cell-body">
+        <%=contact.phone%>
+      </li>
+      <li class="cell cell-body">
+        <%=contact.birthday.toLocaleDateString('pt-BR', options)%>
+      </li>
+      <li class="cell cell-body">
+        <%=contact.gender%>
+      </li>
+      <li class="cell cell-body">
+        <%=contact.cpf%>
+      </li>
+      <li class="cell cell-body li-btns">
+        <a class="delete-contact a-btn" data-id="<%=contact._id%>" data-title="Deletar contato">Deletar</a>
+        <a class="update-contact a-btn" data-id="<%=contact._id%>" data-title="Atualizar os dados do contato">Atualizar</a>
+        <a class="schedule-contact a-btn" data-id="<%=contact._id%>" data-title="Agendar evento">Agendar</a>
+        <a class="copy-contact a-btn" data-title="Copiar dados do contato">Copiar</a>
+      </li>
+    </ul>
+  <% });  %> 
+  <% } else { %>
+    <p>Não foram encontrados contatos</p>
+  <% } %>  
+  

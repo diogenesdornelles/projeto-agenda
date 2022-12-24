@@ -1,0 +1,92 @@
+/*
+css frontend
+*/
+
+
+.header {
+  width: 100vw;
+  position: sticky;
+  -webkit-animation: slide-in-blurred-top 0.3s cubic-bezier(0.230, 1.000, 0.320, 1.000) 0.1s both;
+	        animation: slide-in-blurred-top 0.3s cubic-bezier(0.230, 1.000, 0.320, 1.000) 0.1s both;
+}
+
+@-webkit-keyframes slide-in-blurred-top {
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-blurred-top {
+  0% {
+    -webkit-transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+            transform: translateY(-1000px) scaleY(2.5) scaleX(0.2);
+    -webkit-transform-origin: 50% 0%;
+            transform-origin: 50% 0%;
+    -webkit-filter: blur(40px);
+            filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0) scaleY(1) scaleX(1);
+            transform: translateY(0) scaleY(1) scaleX(1);
+    -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.header ul {
+  display: flex; 
+  justify-content: flex-end;
+  background-color: black;
+  align-items: baseline;
+  padding: 1vh 0 0.5vh 0;
+ }
+
+.header a {
+  letter-spacing: 2px;
+  padding: 4vh 10px 0 10px;
+  margin-right: 3vw;
+  transition: all 0.4s ease;
+  border-bottom: 1px solid #FFF;
+ }
+
+ .header a:hover {
+  background-color: #0c214e;
+ }
+
+.header .logged-user {
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  font-weight: 800;
+  letter-spacing: 2px;
+  padding: 0 10px 0 10px;
+  line-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.header img {
+  height: 4vh;
+  width: auto;
+  filter: invert(1);
+  pointer-events: none;
+}

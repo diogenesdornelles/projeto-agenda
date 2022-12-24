@@ -1,0 +1,21 @@
+<dialog class="update-contact">
+  <p>Alterar informações</p>
+  <section id="container-dialog">
+    <form action="" method="get" class="form-update-contact">
+      Nome: <input type="text" id="new-name" placeholder="Nome" pattern="[A-Za-zÀ-ú0-9 ]*" required>
+      Sobrenome: <input type="text" id="new-surname" placeholder="Sobrenome" required pattern="[A-Za-zÀ-ú0-9 ]*">
+      E-mail: <input type="email" id="new-email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+      Telefone: <input type="tel" id="new-phone" placeholder="Telefone" required pattern="[0-9]{11}">
+      Data de nascimento: <input type="date" id="new-birthday" placeholder="Data de nascimento" required>
+      <div class="gender-option">
+        <label for="gender-male">Gênero masculino</label><input type="radio" name="gender" id="new-gender-male" value="masculino" checked>
+        <label for="gender-female">Gênero feminino</label><input type="radio" name="gender" id="new-gender-female" value="feminino">
+      </div>
+      CPF: <input type="text" id="new-cpf" placeholder="CPF" pattern="[0-9]{11}" required inputmode="number" minlength="11" maxlength="11" autocomplete="off">
+      <div class="btns-dialog">
+        <button id="dialog-btn-send" data-title="Alterar um contato existente">Alterar</button>
+        <button id="dialog-btn-close" data-title="Fechar painel">Fechar</button>
+      </div>
+    </form>
+  </section>
+</dialog>

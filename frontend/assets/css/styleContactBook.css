@@ -1,0 +1,324 @@
+.container-contactBook {
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10%;
+  -webkit-animation: fade-in-fwd 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both;
+	animation: fade-in-fwd 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both;
+}
+
+@-webkit-keyframes fade-in-fwd {
+  0% {
+    -webkit-transform: translateZ(-80px);
+            transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-fwd {
+  0% {
+    -webkit-transform: translateZ(-80px);
+            transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+.container-contactBook .search-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 4%;
+  align-items: center;
+}
+
+.container-contactBook #text-search {
+  align-self: center;
+}
+
+.container-contactBook #table-contacts {
+  display: table;
+  margin: 0 auto;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+
+.container-contactBook .row {
+  display: table-row;
+}
+
+.container-contactBook .cell {
+  display: table-cell;
+}
+
+.container-contactBook .row,
+.container-contactBook .cell {
+  padding: 10px 20px;
+}
+
+.container-contactBook .header-table {
+  background-color: #000000;
+  color: rgb(231, 239, 255);
+}
+
+.container-contactBook .item-header {
+  border: 1px solid white;
+  text-align: center;
+}
+
+.container-contactBook .row-body:nth-child(2n + 1) {
+  background-color: rgba(236, 236, 236, 0.336);
+}
+
+.container-contactBook .row-body:nth-child(2n + 1):hover {
+  background-color: rgba(170, 169, 169, 0.336);
+}
+
+.container-contactBook .row-body:nth-child(2n) {
+  background-color: rgba(201, 201, 201, 0.336);
+}
+
+.container-contactBook .row-body:nth-child(2n):hover {
+  background-color: rgba(123, 123, 123, 0.336);
+}
+
+.container-contactBook .form-insert-new-person,
+.container-contactBook .div-search,
+.container-contactBook .div-close
+{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: flex-start;
+  width: 36vw;
+  height: fit-content;
+  padding: 0% 0 1% 0;
+}
+
+.container-contactBook .form-insert-new-person p,
+.container-contactBook .div-search p,
+.container-contactBook .div-close p
+{
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.container-contactBook input:focus {
+  border: 1px solid #c8c8c8;
+  outline: #e9e9e9;
+}
+
+.container-contactBook button,
+.container-contactBook .delete-contact,
+.container-contactBook .update-contact,
+.container-contactBook .copy-contact,
+#container-dialog button
+{
+  background-color: #000000;
+  color: rgb(231, 239, 255);
+  width: fit-content;
+  padding: 0px 20px;
+  cursor: pointer;
+  height: 4.5vh;
+  margin-left: 0;
+  border-radius: 5px;
+  line-height: 4vh;
+  font-size: .9em;
+  font-weight: 800;
+  transition: all 0.5s ease;
+  margin-top: 2%;
+}
+
+.container-contactBook button:hover,
+.container-contactBook .delete-contact:hover,
+.container-contactBook .update-contact:hover,
+.container-contactBook .copy-contact:hover,
+#container-dialog button:hover
+{
+  background-color: #08193e;
+  border-radius: 10px;
+}
+
+#btn-insert a {
+  text-decoration: none;
+  color: white;
+}
+
+#btn-insert a:visited {
+  color: white;
+}
+
+#btn-insert a:hover {
+  color: white;
+}
+
+#btn-insert a:active {
+  color: white;
+}
+
+.container-contactBook .form-insert-new-person {
+  display: none;
+  flex-direction: column;
+  width: 36vw;
+  align-items: center;
+  text-align: center;
+  -webkit-animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.2s both;
+	animation: slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.2s both;
+}
+
+@-webkit-keyframes slide-in-fwd-center {
+  0% {
+    -webkit-transform: translateZ(-1400px);
+            transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-fwd-center {
+  0% {
+    -webkit-transform: translateZ(-1400px);
+            transform: translateZ(-1400px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+.container-contactBook .btns-div-search {
+  display: flex;
+  margin: 3% 0 3% 0;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.container-contactBook .div-close {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin-top: 0;
+}
+
+.container-contactBook .form-insert-new-person p,
+.container-contactBook .div-search p
+{
+  font-size: 3vh;
+  margin: 7% 0 6% 0;
+  color: white;
+  background-color: black;
+  padding: 7px;
+  text-align: center;
+  width: 100%;
+  border-radius: 7px;
+}
+
+.container-contactBook .form-insert-new-person button {
+  margin-top: 10px;
+}
+
+.container-contactBook #table-contacts .li-btns {
+  display: flex;
+  gap: 2%;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.container-contactBook .input-select {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.container-contactBook .btns-insert {
+  display: flex;
+  justify-content: center;
+  gap: 11%;
+  padding: 5% 0 0 0;
+}
+
+#container-dialog,
+#container-dialog-schedule
+{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 3%;
+  gap: 3px;
+}
+
+#container-dialog-schedule p,
+.update-contact p {
+  text-align: center;
+  font-size: 1.8em;
+  padding: 5px;
+}
+
+#container-dialog .btns-insert,
+#container-dialog .btns-dialog,
+#container-dialog-schedule .btns-dialog 
+{
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+}
+
+#container-dialog #new-gender-option {
+  display: flex;
+  gap: 5%;
+  flex-direction: row;
+  align-items: center;
+  margin: 2% 0 2% 0;
+}
+
+#container-dialog .form-update-contact,
+#container-dialog-schedule .form-schedule-contact
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+#container-dialog .btns-insert,
+#container-dialog .btns-dialog {
+  margin-top: 3%;
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+}
+
+#container-dialog #new-gender-option {
+  display: flex;
+  gap: 5%;
+  flex-direction: row;
+  align-items: center;
+  margin: 2% 0 2% 0;
+}
+
+#container-dialog textarea {
+  width: 70%;
+}
+

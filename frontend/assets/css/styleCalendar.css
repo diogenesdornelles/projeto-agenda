@@ -1,0 +1,76 @@
+.full-calendar {
+  display: none;
+  justify-items: center;
+  width: 86vw;
+  height: 90vh;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
+  scroll-behavior: smooth;
+}
+
+.full-calendar #calendar {
+  padding: 1%;
+}
+
+.btns-div-calendario {
+  display: flex;
+  width: 30%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fc-direction-ltr {
+  direction: ltr;
+  text-align: left;
+  width: 83%;
+  height: 78%;
+}
+
+#title-contact-name {
+  font-size: 1.5em;
+  height: 7vh;
+  line-height: 7vh;
+  display: flex;
+  align-items: center;
+}
+
+.fc-event-title,
+.fc-event-time,
+.fc-daygrid-event-dot {
+  pointer-events: none;
+}
+
+.full-calendar #event-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 0;
+  margin-right: 3%;
+}
+
+.full-calendar .event-info{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1% 0 1%;
+}
+
+.full-calendar .event-info:nth-child(2n + 1) {
+  background-color: rgba(236, 236, 236, 0.336);
+}
+
+.full-calendar #event-infos h2 {
+  font-size: 1.3em;
+  padding: 3%;
+}
+
+.btns-div-calendario button {
+  margin-bottom: 5%;
+}

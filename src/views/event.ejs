@@ -1,0 +1,83 @@
+<% const options = { year: 'numeric', month: 'numeric', day: 'numeric' }; %> 
+
+<h2>Dados do evento: </h2>
+<div class="event-info">
+  <input type="hidden" name="_csrf" class="csrfToken-event" value="<%=csrfToken%>">
+  <input type="hidden" name="id" id="id-contact-event" value="<%=infos.id%>">
+  <span>Nome: </span><input type="text" id="name-contact-event" readonly value="<%=infos.name%>" required> 
+</div>
+<div class="event-info">
+  <span>Sobrenome: </span><input type="text" id="surname-contact-event" readonly value="<%=infos.surname%>" required> 
+</div>
+<div class="event-info">
+  <span>Título: </span><textarea type="text" id="title-contact-event" readonly value="<%=infos.title%>" cols="30" rows="10" placeholder="Descrição" required><%=infos.title%></textarea>
+</div>
+<div class="event-info">
+  <% const date = new Date().toISOString().slice(0,10); %>
+  <span>Data: </span><input type="date" id="date-contact-event" readonly value="<%=`${infos.start.slice(0,10)}` %>" required min="<%=date%>"> 
+</div>
+<div class="event-info">
+  <span>Início: </span><input type="time" id="timestart-contact-event" readonly value="<%=`${infos.start.slice(11,)}` %>" required min="09:00" max="18:00" step="1800"> 
+</div>
+<div class="event-info">
+  <span>Fim: </span><input type="time" id="timeend-contact-event" readonly value="<%=`${infos.end.slice(11,)}`%>" required min="09:00" max="18:00" step="1800"> 
+</div>
+<div class="event-info">
+  <span>Tipo: </span>
+  <select id="type-contact-event" selected="<%=infos.type%>" disabled required>
+    <% if(infos.type === "option-1") {%> 
+      <option value="option-1" selected>Option 1</option> %> 
+    <% } else { %>
+      <option value="option-1">Option 1</option> 
+    <% } %> 
+    <% if(infos.type === "option-2") {%> 
+      <option value="option-2" selected>Option 2</option> %> 
+    <% } else { %>
+      <option value="option-2">Option 2</option> 
+    <% } %> 
+    <% if(infos.type === "option-3") {%> 
+      <option value="option-3" selected>Option 3</option> %> 
+    <% } else { %>
+      <option value="option-3">Option 3</option> 
+    <% } %> 
+    <% if(infos.type === "option-4") {%> 
+      <option value="option-4" selected>Option 4</option> %> 
+    <% } else { %>
+      <option value="option-4">Option 4</option> 
+    <% } %> 
+    <% if(infos.type === "option-5") {%> 
+      <option value="option-5" selected>Option 5</option> %> 
+    <% } else { %>
+      <option value="option-5">Option 5</option> 
+    <% } %> 
+    <% if(infos.type === "option-6") {%> 
+      <option value="option-6" selected>Option 6</option> %> 
+    <% } else { %>
+      <option value="option-6">Option 6</option> 
+    <% } %> 
+    <% if(infos.type === "option-7") {%> 
+      <option value="option-7" selected>Option 7</option> %> 
+    <% } else { %>
+      <option value="option-7">Option 7</option> 
+    <% } %> 
+    <% if(infos.type === "option-8") {%> 
+      <option value="option-8" selected>Option 8</option> %> 
+    <% } else { %>
+      <option value="option-8">Option 8</option> 
+    <% } %> 
+    <% if(infos.type === "option-9") {%> 
+      <option value="option-9" selected>Option 9</option> %> 
+    <% } else { %>
+      <option value="option-9">Option 9</option> 
+    <% } %> 
+    <% if(infos.type === "option-10") {%> 
+      <option value="option-10" selected>Option 10</option> %> 
+    <% } else { %>
+      <option value="option-10">Option 10</option> 
+    <% } %> 
+  </select>
+</div>
+<div class="event-info">
+  <span>Cadastro: </span><input type="date" id="date-register-contact-event" readonly value="<%=infos.createdAt.toISOString().slice(0,10)%>" required> 
+</div>
+

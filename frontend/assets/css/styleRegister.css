@@ -1,0 +1,61 @@
+.index .container .register-painel {
+  width: 30vw;
+  height: fit-content;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10%;
+  -webkit-animation: fade-in-fwd 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both;
+	animation: fade-in-fwd 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.4s both;
+}
+
+@-webkit-keyframes fade-in-fwd {
+  0% {
+    -webkit-transform: translateZ(-80px);
+            transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+@keyframes fade-in-fwd {
+  0% {
+    -webkit-transform: translateZ(-80px);
+            transform: translateZ(-80px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+.index .container .register-painel h1 {
+  text-align: center;
+  width: 100%;
+  font-size: 4.5vh;
+  margin: 5% 0 7% 0;
+}
+
+.index .container .register-painel .form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.index .container .user-registered {
+  font-size: 3.5vh;
+  margin: 0 auto;
+  text-align: center;
+}
+

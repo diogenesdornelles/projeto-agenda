@@ -1,0 +1,27 @@
+<% if (logged) { %> 
+  <h1> Projeto Agenda de Contatos 1.0 </h1>
+  <section class="container-contactBook">
+    <div class="div-search">
+      <%- include('./partials/searchContact') %>
+    </div>
+    <div class="open-calendar">
+      <button id="btn-agenda" data-title="Consultar agenda">Abrir agenda</button>
+    </div>
+    <div class="form-insert-new-person" id="form-insert-new-person">
+      <%- include('./partials/newContact') %>
+    </div>
+    <div id="table-contacts">
+      <%- include('tableContacts', {contacts: contacts}) %>
+    </div>
+    <div class="full-calendar">
+      <div id='calendar'></div>
+      <%- include('./partials/btnsCalendar') %>
+      <div id="event-infos">
+      </div>
+    </div>
+  </section>
+  <%- include('./partials/attContact') %>
+  <%- include('./partials/schedule') %>
+<% } else {%> 
+  <p class="advice-note">Você precisa estar logado para acessar a agenda</p>
+<% } %> 
