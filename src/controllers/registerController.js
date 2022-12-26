@@ -13,11 +13,11 @@ exports.get_register_page = (req, res) => {
   }
 }
 
-exports.post_register_user = (req, res) => {  
+exports.post_register_user = async (req, res) => {  
  
   if (req.body.password !== req.body.repPassword){
     req.session[req.body.userName] = {password: 'Senhas não conferem!'};
-    req.session.save();
+    await req.session.save();
     res.status(204).send();
     return;
   } 
@@ -35,23 +35,23 @@ exports.post_register_user = (req, res) => {
     userName: req.body.userName,
     password: password,
   })
-  .then(() => {
+  .then(async () => {
     req.session[req.body.userName] = {user: 'Usuário criado no cadastro! Faça o login!'};
-    req.session.save();
+    await req.session.save();
     res.status(204).send();
     return;
   })
-  .catch(err => {
+  .catch(async err => {
     if (err.code === 11000) {
       if ('cpf' in err.keyPattern){
         req.session[req.body.userName] = {cpf: 'CPF já consta no cadastro!'};
-        req.session.save();
+        await req.session.save();
         res.status(204).send();
         return;
       } 
       if ('userName' in err.keyPattern){
         req.session[req.body.userName] = {user: 'Usuário já consta no cadastro!'};
-        req.session.save();
+        await req.session.save();
         res.status(204).send();
         return;
       } 

@@ -76,13 +76,13 @@ exports.create_contact = (req, res ) => {
     gender: req.body.gender,
     cpf: req.body.cpf,
   })
-  .then(() => {
+  .then(async () => {
     req.session[req.body.cpf] = {contact: 'Contato salvo no cadastro!'};
-    req.session.save();
+    await req.session.save();
     res.status(204).send();
     return;
   })
-  .catch(err => {
+  .catch(async err => {
     console.log(err);
     if (err.name === 'ValidationError'){
       if ('cpf' in err.errors) {
@@ -93,7 +93,7 @@ exports.create_contact = (req, res ) => {
     if (err.code === 11000) {
       if ('cpf' in err.keyPattern){
         req.session[req.body.cpf] = {cpf: 'CPF já consta no cadastro!'};
-        req.session.save();
+        await req.session.save();
         res.status(204).send();
         return;
       } 
@@ -211,9 +211,9 @@ exports.update_contact = (req, res) => {
       new: true,
     },
   )
-  .then( () => {
+  .then( async () => {
     req.session[req.body.cpf] = {contact: 'Contato atualizado no cadastro!'};
-    req.session.save();
+    await req.session.save();
     res.status(204).send();
     return;
   })
@@ -264,9 +264,9 @@ exports.create_event = (req, res) => {
     url: `/mostrar/evento/${req.params._idContact}`,
     className: 'contact-event-class',
   })
-  .then(() => {
+  .then(async () => {
     req.session[req.params._idContact] = {event: 'Evento agendado!'};
-    req.session.save();
+    await req.session.save();
     res.status(204).send();
     return;
   })
@@ -321,9 +321,9 @@ exports.update_event = (req, res) => {
       new: true,
     },
   )
-  .then( () => {
+  .then(async () => {
     req.session[req.body._idContact] = {event: 'Evento atualizado!'};
-    req.session.save();
+    await req.session.save();
     res.status(204).send();
     return;
   })

@@ -5,7 +5,7 @@ export default function initFormPreventPost (){
     const form2 = document.querySelector('.form-update-contact');
     const form3 = document.querySelector('.form-schedule-contact');
     const form4 = document.querySelector('.register-painel .form');
-    const form5 = document.querySelector('.login-painel .form-login');
+    const form5 = document.querySelector('#form-login');
     if (form1) {
       form1.addEventListener('submit', onSubmitForm);
     }

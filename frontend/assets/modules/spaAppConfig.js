@@ -84,8 +84,8 @@ export default async function spaAppConfig() {
       }
       const route = urlRoutes[location] || urlRoutes[404];
       axios.get(route.template + route.param + route._idUser)
-      .then(response => {
-        document.querySelector('.index .container').innerHTML = response.data;
+      .then(async response => {
+        document.querySelector('.index .container').innerHTML = await response.data;
         if (route.template.includes('agenda') || route.template.includes('registrar') || route.template.includes('entrar')) {
           initFormPreventPost();
         }
