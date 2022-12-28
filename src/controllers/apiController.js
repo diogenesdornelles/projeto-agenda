@@ -1,46 +1,66 @@
-exports.get_advice_register = (req, res) => {
+exports.get_advice_register = async (req, res) => {
   while (typeof req.session[req.params.userName] === undefined) {
     setTimeout(() => {}, 500)
   }
   res.status(200).json(req.session[req.params.userName]); 
   delete req.session[req.params.userName];
-  req.session.save();
+  try {
+    await req.session.save();
+  } catch (e) {
+    console.log(e)
+  }
 } 
 
-exports.get_advice_login = (req, res) => {
+exports.get_advice_login = async (req, res) => {
   while (typeof req.session[req.params.userName] === undefined) {
     setTimeout(() => {}, 500)
   }
   res.status(200).json(req.session[req.params.userName]); 
   delete req.session[req.params.userName];
-  req.session.save();
+  try {
+    await req.session.save();
+  } catch (e) {
+    console.log(e)
+  }
 } 
 
-exports.get_advice_contact = (req, res) => {
+exports.get_advice_contact = async (req, res) => {
   while (typeof req.session[req.params.cpf] === undefined) {
     setTimeout(() => {}, 500)
   }
   res.status(200).json(req.session[req.params.cpf]); 
   delete req.session[req.params.cpf];
-  req.session.save();
+  try {
+    await req.session.save();
+  } catch (e) {
+    console.log(e)
+  }
 } 
 
-exports.get_advice_event = (req, res) => {
+exports.get_advice_event = async (req, res) => {
   while (typeof req.session[req.params._idContact] === undefined) {
     setTimeout(() => {}, 500)
   }
   res.status(200).json(req.session[req.params._idContact]); 
   delete req.session[req.params._idContact];
-  req.session.save();
+  try {
+    await req.session.save();
+  } catch (e) {
+    console.log(e)
+  }
 } 
 
-exports.get_advice_attevent = (req, res) => {
+exports.get_advice_attevent = async (req, res) => {
   while (typeof req.session[req.params._idContact] === undefined) {
     setTimeout(() => {}, 500)
   }
   res.status(200).json(req.session[req.params._idContact]); 
   delete req.session[req.params._idContact];
-  req.session.save();
+  try {
+    await req.session.save();
+  } catch (e) {
+    console.log(e)
+  }
 } 
 
 

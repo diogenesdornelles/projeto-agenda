@@ -12,7 +12,7 @@ css frontend
 .index .container {
   width: 100vw;
   height: 91vh;
-  overflow-x: hidden;
+  overflow-x: auto;
 }
 
 

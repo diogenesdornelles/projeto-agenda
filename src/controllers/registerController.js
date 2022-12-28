@@ -17,9 +17,14 @@ exports.post_register_user = async (req, res) => {
  
   if (req.body.password !== req.body.repPassword){
     req.session[req.body.userName] = {password: 'Senhas não conferem!'};
-    await req.session.save();
-    res.status(204).send();
-    return;
+    try {
+      await req.session.save();
+      res.status(204).send();
+      return;
+    } catch (e) {
+      console.log(e);
+      res.status(204).send();
+    }
   } 
 
   const salt = bcrypt.genSaltSync();
@@ -37,23 +42,38 @@ exports.post_register_user = async (req, res) => {
   })
   .then(async () => {
     req.session[req.body.userName] = {user: 'Usuário criado no cadastro! Faça o login!'};
-    await req.session.save();
-    res.status(204).send();
-    return;
+    try {
+      await req.session.save();
+      res.status(204).send();
+      return;
+    } catch (e) {
+      console.log(e);
+      res.status(204).send();
+    }
   })
   .catch(async err => {
     if (err.code === 11000) {
       if ('cpf' in err.keyPattern){
         req.session[req.body.userName] = {cpf: 'CPF já consta no cadastro!'};
-        await req.session.save();
-        res.status(204).send();
-        return;
+        try {
+          await req.session.save();
+          res.status(204).send();
+          return;
+        } catch (e) {
+          console.log(e);
+          res.status(204).send();
+        }
       } 
       if ('userName' in err.keyPattern){
         req.session[req.body.userName] = {user: 'Usuário já consta no cadastro!'};
-        await req.session.save();
-        res.status(204).send();
-        return;
+        try {
+          await req.session.save();
+          res.status(204).send();
+          return;
+        } catch (e) {
+          console.log(e);
+          res.status(204).send();
+        }
       } 
     } 
     if (err.name === 'ValidationError'){

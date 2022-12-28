@@ -78,9 +78,14 @@ exports.create_contact = (req, res ) => {
   })
   .then(async () => {
     req.session[req.body.cpf] = {contact: 'Contato salvo no cadastro!'};
-    await req.session.save();
-    res.status(204).send();
-    return;
+    try {
+      await req.session.save();
+      res.status(204).send();
+      return;
+    } catch (e) {
+      console.log(e);
+      res.status(204).send();
+    }
   })
   .catch(async err => {
     console.log(err);
@@ -93,9 +98,14 @@ exports.create_contact = (req, res ) => {
     if (err.code === 11000) {
       if ('cpf' in err.keyPattern){
         req.session[req.body.cpf] = {cpf: 'CPF já consta no cadastro!'};
-        await req.session.save();
-        res.status(204).send();
-        return;
+        try {
+          await req.session.save();
+          res.status(204).send();
+          return;
+        } catch (e) {
+          console.log(e);
+          res.status(204).send();
+        }
       } 
     } 
   });
@@ -213,9 +223,14 @@ exports.update_contact = (req, res) => {
   )
   .then( async () => {
     req.session[req.body.cpf] = {contact: 'Contato atualizado no cadastro!'};
-    await req.session.save();
-    res.status(204).send();
-    return;
+    try {
+      await req.session.save();
+      res.status(204).send();
+      return;
+    } catch (e) {
+      console.log(e);
+      res.status(204).send();
+    }
   })
   .catch(err => {
     if (err.name === 'ValidationError'){
@@ -266,9 +281,14 @@ exports.create_event = (req, res) => {
   })
   .then(async () => {
     req.session[req.params._idContact] = {event: 'Evento agendado!'};
-    await req.session.save();
-    res.status(204).send();
-    return;
+    try {
+      await req.session.save();
+      res.status(204).send();
+      return;
+    } catch (e) {
+      console.log(e);
+      res.status(204).send();
+    }
   })
   .catch(err => {
     console.log(err);
@@ -323,9 +343,15 @@ exports.update_event = (req, res) => {
   )
   .then(async () => {
     req.session[req.body._idContact] = {event: 'Evento atualizado!'};
-    await req.session.save();
     res.status(204).send();
-    return;
+    try {
+      await req.session.save();
+      res.status(204).send();
+      return;
+    } catch (e) {
+      console.log(e);
+      res.status(204).send();
+    }
   })
   .catch(err => {
       console.log(err);

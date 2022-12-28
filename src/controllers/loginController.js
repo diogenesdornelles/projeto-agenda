@@ -9,7 +9,6 @@ exports.get_login_page = (req, res) => {
 }
 
 exports.post_login_form = (req, res, next) => {
-  console.log(req.body)
   User.findOne({ 
     userName: req.body.userName,
   })
@@ -25,13 +24,25 @@ exports.post_login_form = (req, res, next) => {
         })
       } else {
           req.session[req.body.userName] = {password: 'Senha incorreta!'};
-          await req.session.save();
-          res.status(204).send();
+          try {
+            await req.session.save();
+            res.status(204).send();
+            return;
+          } catch (e) {
+            console.log(e);
+            res.status(204).send();
+          }
         };
     } else {
       req.session[req.body.userName] = {user: 'Usuário incorreto!'};
-      await req.session.save();
-      return res.status(204).send();
+      try {
+        await req.session.save();
+        res.status(204).send();
+        return;
+      } catch (e) {
+        console.log(e);
+        res.status(204).send();
+      }
       }
     } 
   )

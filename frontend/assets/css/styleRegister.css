@@ -1,7 +1,9 @@
 .index .container .register-painel {
-  width: 30vw;
   height: fit-content;
   margin: 0 auto;
+  max-width: 35vw;
+  min-width: 300px;
+  margin: 0% auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
