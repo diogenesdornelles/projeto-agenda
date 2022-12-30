@@ -18,6 +18,38 @@ function getEvent(element){
       }, 500)
 }
 
+function factoryCalendar(calendarEl, data) {
+  return new Calendar(calendarEl, {
+    plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],
+    initialView: 'dayGridMonth',
+    locale: ptBrLocale,
+    displayEventTime: true,
+    slotLabelFormat: 'HH:mm',
+    headerToolbar: {
+      left: "prev,next today",
+      center: 'title',
+      right: 'dayGridMonth,listWeek'
+    },
+    initialDate: Date.now(),
+    navLinks: true,
+    selectable: true,
+    editable: true,
+    dayMaxEvents: true,
+    titleFormat: {
+      year: 'numeric', month: 'numeric', day: 'numeric',
+    },
+    buttonText: {
+      today: 'Hoje',
+      month: 'Mês',
+      week: 'Semana',
+      day: 'Hoje',
+      list: 'Lista'
+    },
+    events: data,
+    eventColor: '#000'
+  });
+}
+
 export default async function handleFullCalendar(){
   try {
     const data = await getEventsAgenda();
@@ -28,42 +60,9 @@ export default async function handleFullCalendar(){
     divCalendar.scrollIntoView(true, {
       behavior: "smooth",
     });
-  
-    const calendar = new Calendar(calendarEl, {
-      plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],
-      initialView: 'dayGridMonth',
-      locale: ptBrLocale,
-      displayEventTime: true,
-      slotLabelFormat: 'HH:mm',
-      headerToolbar: {
-        left: "prev,next today",
-        center: 'title',
-        right: 'dayGridMonth,listWeek'
-      },
-      // timeGridWeek, timeGridDay // not
-      //listWeek,dayGridMonth // work
-      initialDate: Date.now(),
-      navLinks: true,
-      selectable: true,
-      editable: true,
-      dayMaxEvents: true,
-      titleFormat: {
-        year: 'numeric', month: 'numeric', day: 'numeric',
-      },
-      buttonText: {
-        today: 'Hoje',
-        month: 'Mês',
-        week: 'Semana',
-        day: 'Hoje',
-        list: 'Lista'
-      },
-      events: data,
-      eventColor: '#000'
-    });
-  
+    const calendar = factoryCalendar(calendarEl, data);
     calendar.setOption('locale', 'pt-br');
     calendar.render();
-
     document.addEventListener('click', (event) => {     
       if (event.target.href.includes('/mostrar/evento')){
         event.preventDefault();

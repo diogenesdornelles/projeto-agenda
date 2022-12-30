@@ -13,6 +13,7 @@ export default function handleUpdateEvent() {
   const title = document.querySelector('#title-contact-event');
   const _csrf = document.querySelector('.event-info .csrfToken-event');
   const id = document.querySelector('#id-contact-event').value;
+  const btnAttCalendar = document.querySelector(".fc-dayGridMonth-button");
   
   const arrayEls = [date.checkValidity(), timeStart.checkValidity(), timeEnd.checkValidity(), type.checkValidity(), title.checkValidity()];
   if (arrayEls.includes(false)) return;
@@ -56,7 +57,7 @@ export default function handleUpdateEvent() {
     handleFrontEnd(`attevent`, id);
     eventInfo.innerHTML = "";
     eventInfo.style.width = '0';
-    document.querySelector(".fc-dayGridMonth-button").click();
+    btnAttCalendar.click();
     handleFullCalendar();
     disableFormAttEvent();
   }).catch(error => console.log(error)) 

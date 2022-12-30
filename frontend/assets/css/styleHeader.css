@@ -2,12 +2,11 @@
 css frontend
 */
 
-
 .header {
   width: 100vw;
   position: sticky;
   -webkit-animation: slide-in-blurred-top 0.3s cubic-bezier(0.230, 1.000, 0.320, 1.000) 0.1s both;
-	        animation: slide-in-blurred-top 0.3s cubic-bezier(0.230, 1.000, 0.320, 1.000) 0.1s both;
+  animation: slide-in-blurred-top 0.3s cubic-bezier(0.230, 1.000, 0.320, 1.000) 0.1s both;
 }
 
 @-webkit-keyframes slide-in-blurred-top {

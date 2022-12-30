@@ -25,14 +25,18 @@ const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
 
 // Routes for application
-const routes = require('./routes');
+const apiRoutes = require('./routes/apiRoutes');
+const contactBookRoutes = require('./routes/contactBookRoutes');
+const homeRoutes = require('./routes/homeRoutes');
+const indexRoutes = require('./routes/indexRoutes');
+const loginRoutes = require('./routes/loginRoutes');
+const registerRoutes = require('./routes/registerRoutes');
 
 //
-
 const path = require('path');
 
 // For security application
-const helmet = require('helmet');
+// const helmet = require('helmet');
 
 // csrfTokens for forms
 const csrf = require('csurf');
@@ -43,9 +47,6 @@ const cookieParser = require('cookie-parser');
 
 // Middlewares for routes
 const { ignoreFavicon, middlewareGlobal, csrfMiddleware, checkCsrfError } = require('./src/middlewares/middleware');
-
-// app.use(bodyParser);
-// app.use(cookieParser());
 
 // Deactived in localhost to permit external services, like axios.
 //app.use(helmet());
@@ -85,7 +86,13 @@ app.use(csrfMiddleware);
 app.use(middlewareGlobal);
 app.use(checkCsrfError);
 app.use(ignoreFavicon);
-app.use(routes);
+
+app.use(apiRoutes);
+app.use(contactBookRoutes);
+app.use(homeRoutes);
+app.use(indexRoutes);
+app.use(loginRoutes);
+app.use(registerRoutes);
 
 // Initialize server
 app.on('ready', () => {

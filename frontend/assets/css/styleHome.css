@@ -7,12 +7,14 @@ css frontend
   width: 100vw;
   height: 95vh;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .index .container {
   width: 100vw;
   height: 91vh;
   overflow-x: auto;
+  margin-bottom: 2px;
 }
 
 

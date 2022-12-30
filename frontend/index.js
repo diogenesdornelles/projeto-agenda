@@ -9,6 +9,7 @@ import './assets/css/styleHeader.css';
 import './assets/css/styleHome.css';
 import './assets/css/styleIndex.css';
 import './assets/css/styleLogin.css';
+import './assets/css/styleFooter.css';
 import './assets/css/styleRegister.css';
 import initContactBookApp from './assets/modules/initContactBookApp';
 import loadImages from "./assets/modules/loadImages";

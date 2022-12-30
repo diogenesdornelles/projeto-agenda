@@ -185,3 +185,25 @@ input[type="date"]:focus
   cursor: pointer;
   border-radius: 3px;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #FFF; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #020c22; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #000; 
+}

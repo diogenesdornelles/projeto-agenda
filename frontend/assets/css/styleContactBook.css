@@ -275,7 +275,8 @@
 }
 
 #container-dialog-schedule p,
-.update-contact p {
+.update-contact p 
+{
   text-align: center;
   font-size: 1.8em;
   padding: 5px;
@@ -309,7 +310,8 @@
 }
 
 #container-dialog .btns-insert,
-#container-dialog .btns-dialog {
+#container-dialog .btns-dialog 
+{
   margin-top: 3%;
   display: flex;
   justify-content: space-evenly;
