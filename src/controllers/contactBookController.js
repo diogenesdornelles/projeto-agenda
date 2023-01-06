@@ -1,373 +1,364 @@
-const { User } = require('../models/UserModel');
-const { Contact } = require('../models/ContactModel');
-const { Event } = require('../models/EventModel');
-const { ValidateCpf } = require('../models/validateCpf');
-const validator = require('validator');
-
-exports.loginIsRequired = (req, res, next) => {
-  if (req.params.load === 'contactBookPage' && (typeof req.params._idUser !== undefined)) {
-    User.findOne({ 
-      _id: req.params._idUser
-    })
-    .then(data => {
-      if (data) {
-        next();
-      } else {
-        res.render('contactBook', {
-                logged: false, 
-                contacts: false, 
-              }
-            )}
-    }).catch( err => console.log(err));
-  } else {
-    res.render('contactBook', {
-            logged: false, 
-            contacts: false, 
-          }
-    )} 
-};
+const { Contact } = require('../models/ContactModel')
+const { Event } = require('../models/EventModel')
+const { ValidateCpf } = require('../models/ValidateCpf')
+const validator = require('validator')
 
 // RENDERIZE FULL PAGE
 exports.get_contactBook_page = (req, res) => {
-        Contact.find().sort({ name: 1 })
-        .then( data => {
-          res.render('contactBook', {
-                          logged: true, 
-                          contacts: data, 
-                        }
-    )}).catch( err => {
-      console.log(err);
-      res.render('404');
-    });
-} 
+  Contact.find().sort({ name: 1 })
+    .then(data => {
+      res.render('contactBook', {
+        logged: true,
+        contacts: data
+      }
+      )
+    }).catch(err => {
+      console.log(err)
+      return res.status(400).render('404')
+    })
+}
 
 // CREATE CONTACT
-exports.create_contact = (req, res ) => {
+exports.create_contact = (req, res) => {
+  const { cpf, name, surname, email, phone, birthday, gender } = req.body
 
-  const validatorCpf = new ValidateCpf(req.body.cpf);
+  const validatorCpf = new ValidateCpf(cpf)
   if (!validatorCpf.validate()) {
-    res.status(204).send();
-    return;
+    return res.status(204).send()
   };
 
-  const checkData = req.body.name && req.body.surname && req.body.email && req.body.phone && req.body.birthday && req.body.gender;
-  
-  if (!checkData || req.body.phone.length !== 11) {
-    res.status(204).send();
-    return;
+  const checkData = name && surname && email && phone && birthday && gender
+
+  if (!checkData) {
+    return res.status(204).send()
   }
 
-  if (req.body.phone.length !== 11) {
-    res.status(204).send();
-    return;
+  if (phone.length !== 11) {
+    return res.status(204).send()
   }
 
-  if (!validator.isEmail(req.body.email)) {
-    res.status(204).send();
-    return;
+  if (!validator.isEmail(email)) {
+    return res.status(204).send()
   }
 
   Contact.create({
-    name: req.body.name,
-    surname: req.body.surname,
-    email: req.body.email,
-    phone: req.body.phone,
-    birthday: new Date(req.body.birthday),
-    gender: req.body.gender,
-    cpf: req.body.cpf,
+    name,
+    surname,
+    email,
+    phone,
+    birthday: new Date(birthday),
+    gender,
+    cpf
   })
-  .then(async () => {
-    req.session[req.body.cpf] = {contact: 'Contato salvo no cadastro!'};
-    try {
-      await req.session.save();
-      res.status(204).send();
-      return;
-    } catch (e) {
-      console.log(e);
-      res.status(204).send();
-    }
-  })
-  .catch(async err => {
-    console.log(err);
-    if (err.name === 'ValidationError'){
-      if ('cpf' in err.errors) {
-        res.status(204).send();
-        return;
-      } 
-    } 
-    if (err.code === 11000) {
-      if ('cpf' in err.keyPattern){
-        req.session[req.body.cpf] = {cpf: 'CPF já consta no cadastro!'};
-        try {
-          await req.session.save();
-          res.status(204).send();
-          return;
-        } catch (e) {
-          console.log(e);
-          res.status(204).send();
+    .then(async () => {
+      req.session[cpf] = { contact: 'Contato salvo no cadastro!' }
+      try {
+        await req.session.save()
+        return res.status(204).send()
+      } catch (e) {
+        console.log(e)
+        return res.status(400).render('404')
+      }
+    })
+    .catch(async err => {
+      console.log(err)
+      if (err.name === 'ValidationError') {
+        if ('cpf' in err.errors) {
+          return res.status(204).send()
         }
-      } 
-    } 
-  });
+      }
+      if (err.code === 11000) {
+        if ('cpf' in err.keyPattern) {
+          req.session[cpf] = { cpf: 'CPF já consta no cadastro!' }
+          try {
+            await req.session.save()
+            return res.status(204).send()
+          } catch (e) {
+            console.log(e)
+            return res.status(400).render('404')
+          }
+        }
+      }
+    })
 }
 
 // READ CONTACT
 exports.get_all_contacts = (req, res) => {
   Contact.find().sort({ name: 1 })
-  .then( data => {
-    if (data) {
-      res.render('tableContacts', {
-        contacts: data, 
+    .then(data => {
+      if (data.length > 0) {
+        res.render('tableContacts', {
+          contacts: data
         })
-    } else {
-      res.render('tableContacts', {
-        contacts: false, 
+      } else {
+        res.render('tableContacts', {
+          contacts: false
         })
-    }
-    }).catch( err => {
-      console.log(err);
-      res.render('404');
-    });
+      }
+    }).catch(err => {
+      console.log(err)
+      return res.status(400).render('404')
+    })
 }
 
 // READ CONTACT
 exports.get_contact_by_cpf = (req, res) => {
-  Contact.findOne({ 
-    cpf: req.params.cpfNumber,
+  const { cpf } = req.params
+  Contact.findOne({
+    cpf
   })
-  .then(data => {
-    if (data) {
-      res.render('tableContacts', {
-        contacts: [data], 
+    .then(data => {
+      if (data) {
+        res.render('tableContacts', {
+          contacts: [data]
         })
-    } else {
-      res.render('tableContacts', {
-        contacts: false, 
+      } else {
+        res.render('tableContacts', {
+          contacts: false
+        }
+        )
       }
-    )}
-    }).catch( err => {
-      console.log(err);
-      res.render('404');
-    });
+    }).catch(err => {
+      console.log(err)
+      return res.status(400).render('404')
+    })
 }
 
 // READ CONTACT
 exports.get_contact_by_name = (req, res) => {
-  Contact.findOne({ 
-    name: req.params.name,
+  const { name } = req.params
+  Contact.findOne({
+    name
   })
-  .then(data => {
-    let result;
-    if (data) {
-      if (typeof data === 'object') {
-        result = [data]
-      } else {
-        result = data;
-      }
-      res.render('tableContacts', {
-        contacts: result, 
+    .then(data => {
+      let result
+      if (data) {
+        if (typeof data === 'object') {
+          result = [data]
+        } else {
+          result = data
+        }
+        res.render('tableContacts', {
+          contacts: result
         })
-    } else {
-      res.render('tableContacts', {
-        contacts: false, 
+      } else {
+        res.render('tableContacts', {
+          contacts: false
+        }
+        )
       }
-    )}
-    }).catch( err => {
-      console.log(err);
-      res.render('404');
-    });
+    }).catch(err => {
+      console.log(err)
+      res.status(400).render('404')
+    })
 }
 
 // UPDATE CONTACT
-exports.update_contact = (req, res) => {
-  
-  const validatorCpf = new ValidateCpf(req.body.cpf);
+exports.update_contact = async (req, res) => {
+  const { cpf, name, surname, email, phone, birthday, gender } = req.body
+  const { id } = req.params
+  const validatorCpf = new ValidateCpf(cpf)
   if (!validatorCpf.validate()) {
-    res.status(204).send();
-    return;
+    return res.status(204).send()
   };
 
-  const checkData = req.body.name && req.body.surname && req.body.email && req.body.phone && req.body.birthday && req.body.gender;
+  const checkData = name && surname && email && phone && birthday && gender
 
   if (!checkData) {
-    res.status(204).send();
-    return;
+    return res.status(204).send()
   }
 
-  if (req.body.phone.length !== 11) {
-    res.status(204).send();
-    return;
+  if (phone.length !== 11) {
+    return res.status(204).send()
   }
 
-  if (!validator.isEmail(req.body.email)) {
-    res.status(204).send();
-    return;
+  if (!validator.isEmail(email)) {
+    return res.status(204).send()
   }
-
-  Contact.findOneAndUpdate(
-    {
-      _id: req.params._idContact
-    },
-    { 
-      name: req.body.name,
-      surname: req.body.surname,
-      email: req.body.email,
-      phone: req.body.phone,
-      birthday: new Date(req.body.birthday),
-      gender: req.body.gender,
-      cpf: req.body.cpf,
-    },
-    { 
-      new: true,
-    },
-  )
-  .then( async () => {
-    req.session[req.body.cpf] = {contact: 'Contato atualizado no cadastro!'};
-    try {
-      await req.session.save();
-      res.status(204).send();
-      return;
-    } catch (e) {
-      console.log(e);
-      res.status(204).send();
+  let data
+  try {
+    const contact = await Contact.findById(id)
+    if (contact.cpf !== cpf) {
+      data = {
+        name,
+        surname,
+        email,
+        phone,
+        birthday: new Date(birthday),
+        gender,
+        cpf
+      }
+    } else {
+      data = {
+        name,
+        surname,
+        email,
+        phone,
+        birthday: new Date(birthday),
+        gender
+      }
     }
-  })
-  .catch(err => {
-    if (err.name === 'ValidationError'){
-      if ('cpf' in err.errors) {
-        res.status(204).send();
-        return;
-      } 
-    }
-    else {
-      console.log(err);
-      res.render('404');
-    }
-    console.log(err);
-  });
+    Contact.findOneAndUpdate(
+      {
+        _id: id
+      },
+      data,
+      {
+        new: true
+      })
+      .then(async () => {
+        req.session[cpf] = { contact: 'Contato atualizado no cadastro!' }
+        try {
+          await req.session.save()
+          return res.status(204).send()
+        } catch (e) {
+          console.log(e)
+          return res.status(400).render('404')
+        }
+      })
+      .catch(err => {
+        if (err.name === 'ValidationError') {
+          if ('cpf' in err.errors) {
+            return res.status(204).send()
+          }
+        } else {
+          console.log(err)
+          return res.status(400).render('404')
+        }
+        console.log(err)
+      })
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 // DELETE CONTACT
 exports.delete_contact = (req, res) => {
-  Contact.findByIdAndDelete(req.params._idContact)
-  .then( () => {
-    res.status(204).send();
-    }).catch( err => {
-      console.log(err);
-      res.render('404');
-    });
-};
+  const { id } = req.params
+  Contact.findByIdAndDelete(id)
+    .then(() => {
+      return res.status(204).send()
+    }).catch(err => {
+      console.log(err)
+      return res.status(400).render('404')
+    })
+}
 
 // CREATE EVENT
 exports.create_event = (req, res) => {
-  
+  const { name, surname, type, start, end, title } = req.body
+  const { id } = req.params
   Event.create({
-    name: req.body.name,
-    surname: req.body.surname,
-    id: req.params._idContact,
-    type: req.body.type,
-    start: req.body.start,
-    end: req.body.end,
-    title: req.body.title,
+    name,
+    surname,
+    id,
+    type,
+    start,
+    end,
+    title,
     allDay: false,
     extendedProps: {
-      tipo: req.body.type,
-      nome: req.body.name,
-      sobrenome: req.body.surname,
-      id: req.params._idContact,
+      tipo: type,
+      nome: name,
+      sobrenome: surname,
+      id
     },
-    url: `/mostrar/evento/${req.params._idContact}`,
-    className: 'contact-event-class',
+    url: `/mostrar/evento/${id}`,
+    className: 'contact-event-class'
   })
-  .then(async () => {
-    req.session[req.params._idContact] = {event: 'Evento agendado!'};
-    try {
-      await req.session.save();
-      res.status(204).send();
-      return;
-    } catch (e) {
-      console.log(e);
-      res.status(204).send();
-    }
-  })
-  .catch(err => {
-    console.log(err);
-  });
+    .then(async () => {
+      req.session[id] = { event: 'Evento agendado!' }
+      try {
+        await req.session.save()
+        return res.status(204).send()
+      } catch (e) {
+        console.log(e)
+        return res.status(400).render('404')
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      return res.status(400).render('404')
+    })
 }
 
 // READ EVENT
 exports.get_agenda = (req, res) => {
   Event.find().sort({ start: 1 })
-  .then( (data) => {
-    res.status(200).json(data); 
-    }).catch( err => {
-      console.log(err);
-      res.render('404');
-    });
+    .then((data) => {
+      res.status(200).json(data)
+    }).catch(err => {
+      console.log(err)
+      return res.status(400).render('404')
+    })
 }
 
 // READ EVENT
 exports.get_agenda_contact = (req, res) => {
-  if (req.params.value === 'true'){
+  const { value, id } = req.params
+  if (value === 'true') {
     Event.findOne({
-      id: req.params._idContact
+      id
     })
-    .then( response => {
-      res.render('event', {infos: response}); 
-      }).catch( err => {
-        console.log(err);
-        res.render('404');
-      });
+      .then(response => {
+        res.render('event', { infos: response })
+      }).catch(err => {
+        console.log(err)
+        return res.status(400).render('404')
+      })
   } else {
-    res.status(204).send();
+    res.status(204).send()
   }
 }
 
 // UPDATE EVENT
 exports.update_event = (req, res) => {
+  const { type, start, end, title } = req.body
+  const { id } = req.params
   Event.findOneAndUpdate(
     {
-      id: req.params._idContact
+      id
     },
-    { $set: {
-        type: req.body.type,
-        start: req.body.start,
-        end: req.body.end,
-        title: req.body.title,
+    {
+      $set: {
+        type,
+        start,
+        end,
+        title
       }
     },
-    { 
-      runValidators: true, 
-      new: true,
-    },
+    {
+      runValidators: true,
+      new: true
+    }
   )
-  .then(async () => {
-    req.session[req.body._idContact] = {event: 'Evento atualizado!'};
-    res.status(204).send();
-    try {
-      await req.session.save();
-      res.status(204).send();
-      return;
-    } catch (e) {
-      console.log(e);
-      res.status(204).send();
+    .then(async () => {
+      req.session[id] = { event: 'Evento atualizado!' }
+      try {
+        await req.session.save()
+        return res.status(204).send()
+      } catch (e) {
+        console.log(e)
+        return res.status(400).render('404')
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      return res.status(400).render('404')
     }
-  })
-  .catch(err => {
-      console.log(err);
-    }
-  );
+    )
 }
 
 // DELETE EVENT
 exports.delete_event = (req, res) => {
+  const { id } = req.params
   Event.findOneAndDelete({
-    id: req.params._idContact
+    id
   })
-  .then( () => {
-    res.status(204).send();
-    }).catch( err => {
-      console.log(err);
-      res.render('404');
-    });
-};
+    .then(() => {
+      return res.status(204).send()
+    }).catch(err => {
+      console.log(err)
+      return res.status(400).render('404')
+    })
+}

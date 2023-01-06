@@ -1,0 +1,25 @@
+<dialog class="event-contact">
+  <h2>Registrar evento</h2>
+  <section id="container-dialog-event">
+    <form action="" method="GET" class="form-event-contact">
+      <label for="event-name-contact">Nome: </label><input type="text" id="event-name-contact" readonly>
+      <label for="event-surname-contact">Sobrenome: </label><input type="text" id="event-surname-contact" readonly>
+      <label for="title-event">Descrição da atividade</label><textarea name="message" id="title-event" cols="30" rows="10" placeholder="Descrição" required></textarea>
+      <% const date = new Date().toISOString().slice(0,10); %>
+      <label for="event-date-contact">Data: </label><input type="date" id="event-date-contact" placeholder="Data" required min="<%=date%>">
+      <label for="event-timestart-contact">Hora inicial:</label><input type="time" name="timestart" id="event-timestart-contact" required min="09:00" max="18:00" step="1800">
+      <label for="event-timeend-contact">Hora Final: </label><input type="time" name="timeend" id="event-timeend-contact" required min="09:00" max="18:00" step="1800">
+      Tipo:
+      <select id="event-options-contact">
+        <option value="prioridade-01">Prioridade 01</option>
+        <option value="prioridade-02">Prioridade 02</option>
+        <option value="prioridade-03">Prioridade 03</option>
+        <option value="prioridade-04">Prioridade 04</option>
+      </select>
+      <div class="btns-dialog">
+        <button id="dialog-btn-send-event" data-title="Agendar um serviço">Agendar</button>
+        <button id="dialog-btn-close-event" data-title="Fechar painel">Fechar</button>
+      </div>
+    </form>
+  </section>
+</dialog>

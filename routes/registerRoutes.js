@@ -1,10 +1,10 @@
-const express = require('express');
-const route = express.Router();
+const express = require('express')
+const route = express.Router()
 
-const registerController = require('../src/controllers/registerController');
+const registerController = require('../src/controllers/registerController')
 
-route.get('/registrar/:load?', registerController.get_register_page);
+route.get('/registrar/:load?', registerController.get_register_page)
 
-route.post('/registrar', registerController.post_register_user);
+route.post('/registrar', registerController.post_register_user)
 
-module.exports = route;
+module.exports = route

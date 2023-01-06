@@ -1,9 +1,9 @@
 <svg width="100%" height="3" xmlns="http://www.w3.org/2000/svg">
   <rect width="100%" height="2" x="0" y="0" />
 </svg>
-<div class="register-painel"> 
+<div class="register-painel">
   <h1>Registrar novo usuário</h1>
-  <form action="/registrar" method="POST" class="form">
+  <form action="/registrar" method="POST" class="form" id="new-user-form">
     <input type="hidden" value="<%=csrfToken%>" name="_csrf" class="_csrf">
     <input type="text" name="name" id="new-user-name" placeholder="Nome" required pattern="[A-Za-zÀ-ú0-9 ]*">
     <input type="text" name="surname" id="new-user-surname" placeholder="Sobrenome" required pattern="[A-Za-zÀ-ú0-9 ]*">
@@ -11,13 +11,13 @@
     <input type="date" name="birthday" id="new-user-birthday" placeholder="Data de nascimento" required>
     <input type="email" name="email" id="new-user-email" placeholder="E-mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
     <div class="gender-option">
-      Gênero masculino <input type="radio" name="gender" id="new-user-gender-male" value="male" checked>
-      Gênero feminino <input type="radio" name="gender" id="new-user-gender-female" value="female">
+      Gênero masculino <input type="radio" name="gender" id="new-user-gender-male" value="masculino" checked>
+      Gênero feminino <input type="radio" name="gender" id="new-user-gender-female" value="feminino">
     </div>
     <input type="text" name="cpf" id="new-user-cpf" placeholder="CPF" pattern="[0-9]{11}" required inputmode="number" minlength="11" maxlength="11" autocomplete="off">
-    <input type="text" name="userName" id="new-user-userName" placeholder="Nome de usuário" required pattern="[ A-Za-z0-9]{3,}">
+    <input type="text" name="user" id="new-user-user" placeholder="Nome de usuário" required pattern="[ A-Za-z0-9]{3,}">
     <input type="password" name="password" id="new-user-password" placeholder="Senha" required pattern="[A-Za-z0-9!@#$%]{6,}">
-    <input type="password" name="repPassword" id="new-user-repPassword" placeholder="Repita a senha" required>
+    <input type="password" name="reppassword" id="new-user-reppassword" placeholder="Repita a senha" required>
     <button type="submit" id="btn-submit" class="btn" data-title="Enviar formulário">Registrar</button>
   </form>
 </div>

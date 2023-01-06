@@ -1,64 +1,64 @@
-//environment variables
-require('dotenv').config();
+// environment variables
+require('dotenv').config()
 // initialize express
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
 // initialize mongoose db
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 mongoose.connect(process.env.CONNSTRING,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   })
   .then(() => {
-    app.emit('ready');
+    app.emit('ready')
   })
-  .catch(e => console.log(e));
+  .catch(e => console.log(e))
 
 // Initialize session to save cookies on user's browser
-const session = require('express-session');
+const session = require('express-session')
 
 // Save session on mongoDB by MongoStore
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo')
 
 // Flash: for instant messages only
-const flash = require('connect-flash');
+const flash = require('connect-flash')
 
 // Routes for application
-const apiRoutes = require('./routes/apiRoutes');
-const contactBookRoutes = require('./routes/contactBookRoutes');
-const homeRoutes = require('./routes/homeRoutes');
-const indexRoutes = require('./routes/indexRoutes');
-const loginRoutes = require('./routes/loginRoutes');
-const registerRoutes = require('./routes/registerRoutes');
+const apiRoutes = require('./routes/apiRoutes')
+const contactBookRoutes = require('./routes/contactBookRoutes')
+const homeRoutes = require('./routes/homeRoutes')
+const indexRoutes = require('./routes/indexRoutes')
+const loginRoutes = require('./routes/loginRoutes')
+const registerRoutes = require('./routes/registerRoutes')
 
 //
-const path = require('path');
+const path = require('path')
 
 // For security application
 // const helmet = require('helmet');
 
 // csrfTokens for forms
-const csrf = require('csurf');
+const csrf = require('csurf')
 
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
 
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser')
 
 // Middlewares for routes
-const { ignoreFavicon, middlewareGlobal, csrfMiddleware, checkCsrfError } = require('./src/middlewares/middleware');
+const { ignoreFavicon, middlewareGlobal, csrfMiddleware, checkCsrfError } = require('./src/middlewares/middleware')
 
 // Deactived in localhost to permit external services, like axios.
-//app.use(helmet());
+// app.use(helmet());
 
 // Enables the posting of forms to the application
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }))
 
 // Enables parsing json to the application
-app.use(express.json());
+app.use(express.json())
 
 // Declare statisc files.
-app.use(express.static(path.resolve(__dirname, 'public')));
+app.use(express.static(path.resolve(__dirname, 'public')))
 
 // Options to initialize sessions
 const sessionOptions = session({
@@ -70,34 +70,34 @@ const sessionOptions = session({
     maxAge: 1000 * 30,
     httpOnly: true
   }
-});
+})
 
-app.use(sessionOptions);
-app.use(flash());
+app.use(sessionOptions)
+app.use(flash())
 app.use(cookieParser('HGBbgvGCnghCkn8655667GgCGBgcT445gVGVCfjhvhgv'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // Set views
-app.set('views', path.resolve(__dirname, 'src', 'views'));
-app.set('view engine', 'ejs');
+app.set('views', path.resolve(__dirname, 'src', 'views'))
+app.set('view engine', 'ejs')
 
-app.use(csrf( { cookie: true } ));
-app.use(csrfMiddleware);
-app.use(middlewareGlobal);
-app.use(checkCsrfError);
-app.use(ignoreFavicon);
+app.use(csrf({ cookie: true }))
+app.use(csrfMiddleware)
+app.use(middlewareGlobal)
+app.use(checkCsrfError)
+app.use(ignoreFavicon)
 
-app.use(apiRoutes);
-app.use(contactBookRoutes);
-app.use(homeRoutes);
-app.use(indexRoutes);
-app.use(loginRoutes);
-app.use(registerRoutes);
+app.use(apiRoutes)
+app.use(contactBookRoutes)
+app.use(homeRoutes)
+app.use(indexRoutes)
+app.use(loginRoutes)
+app.use(registerRoutes)
 
 // Initialize server
 app.on('ready', () => {
   app.listen(3000, () => {
-    console.log('Acessar http://localhost:3000');
-    console.log('Servidor executando na porta 3000');
-  });
-});
+    console.log('Acessar http://localhost:3000')
+    console.log('Servidor executando na porta 3000')
+  })
+})

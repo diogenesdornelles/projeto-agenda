@@ -4,8 +4,8 @@
 <div class="login-painel">
   <h1>Login</h1>
   <form action="/entrar" method="POST" class="form" id="form-login" class="form-login">
-    <input type="text" name="userName" id="userName" placeholder="Usuário" required>
-    <input type="password" name="password" id="password" placeholder="Senha" required>
+    <input type="text" name="user" id="login-user" placeholder="Usuário" required>
+    <input type="password" name="password" id="login-password" placeholder="Senha" required>
     <input type="hidden" value="<%= csrfToken %>" name="_csrf" class="_csrf">
     <button type="submit" id="btn-submit" class="btn" data-title="Logar no sistema">Logar</button>
   </form>
